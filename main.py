@@ -62,9 +62,10 @@ class MainHandler(RequestHandler):
 def make_app():
     settings = {
     "static_path": os.path.join(os.path.dirname(__file__), "web"),
+    "template_path":os.path.join(os.path.dirname(__file__), "templates"),
     "cookie_secret": "__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
     "login_url": "/login",
-    "xsrf_cookies": True,
+    "xsrf_cookies": False,
 }
     return Application([
         (r"/", MainHandler),
