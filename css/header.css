@@ -1,0 +1,20 @@
+.masthead {
+    height: 50vh;
+    min-height: 500px;
+    background-image: url("/Users/corbinday/Desktop/Neal's Law Project/reaching-the-bar/images/iStock_000005426694_Large.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+  }
+
+  .masthead h1 {
+    font-size: 5em;
+    color: white;
+  }
+  
+  .masthead p {
+      font-size: 2em;
+      color: rgb(75, 74, 74);
+  }
+  
