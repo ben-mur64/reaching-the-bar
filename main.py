@@ -6,6 +6,7 @@ import scraper
 import dao
 import report
 
+import os
 import tornado
 from tornado.escape import json_encode
 from tornado.ioloop import IOLoop
@@ -59,13 +60,21 @@ class MainHandler(RequestHandler):
         self.write(open("index.html", "r").read())
 
 def make_app():
+    settings = {
+    "static_path": os.path.join(os.path.dirname(__file__), "web"),
+    "cookie_secret": "__TODO:_GENERATE_YOUR_OWN_RANDOM_VALUE_HERE__",
+    "login_url": "/login",
+    "xsrf_cookies": True,
+}
     return Application([
         (r"/", MainHandler),
         (r'/report', ReportHandler),
         (r'/preferences', PreferencesHandler),
         (r'/scrape', ScrapeTestHandler),
-        (r'/resync', ResyncHandler)
-    ])
+        (r'/resync', ResyncHandler),
+        (r"/(apple-touch-icon\.png)", tornado.web.StaticFileHandler,
+     dict(path=settings['static_path'])),
+    ], **settings)
 
 def main():
     print("Hello world!")
