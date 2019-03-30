@@ -1,33 +1,87 @@
 <html>
-    
+
 <head>
-    <title>test</title>
+    <title>Preferences</title>
     <script type="text/javascript">
-        function submitform(){
-            var formData = JSON.stringify($("#myForm").serializeArray());
-            alert("Sending Json");
-            $.ajax({
-                type: "POST",
-                url: "",
-                data: formData,
-                success: function(){},
-                dataType: "json",
-                contentType : "application/json"
+        const serialize_form = form => JSON.stringify(
+        Array.from(new FormData(form).entries())
+            .reduce((m, [ key, value ]) => Object.assign(m, { [key]: value }), {})
+        );
+
+        $(document).ready(function(){
+            $('#pref_form').on('submit', function(event) {
+            alert("Function fired!")
+            event.preventDefault();
+            const json = serialize_form(this);
+            console.log(json);
+            /*$.ajax({
+                type: 'POST',
+                url: 'https://url.com/users/register',
+                dataType: 'json',
+                data: json,
+                contentType: 'application/json',
+                success: function(data) {
+                alert(data)
+                }
+            });*/
             });
-        }   
+        });
     </script>
 </head>
 
 <body>
-    <form action="/preferences" method="POST" name="myForm">
-        <p><label for="first_name">First Name:</label>
-        <input type="text" name="first_name" id="fname"></p>
-
-        <p><label for="last_name">Last Name:</label>
-        <input type="text" name="last_name" id="lname"></p>
-
-        <input value="Submit" type="submit" onclick="submitform()">
-    </form>
+    Please enter your priorities from 0 to 5 on the following characteristics of a law school (change):
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <form id="pref_form">
+            <div>
+                <label for="emp_percent">Employment Percentage:</label>
+                <input type="text" name="emp_percent" id="emp_percent" />
+            </div>
+            <div>
+                <label for="big_law">Big Law Firms:</label>
+                <input type="text" name="big_law" id="big_law" />
+            </div>
+            <div>
+                <label for="small_law">Small Law Firms:</label>
+                <input type="text" name="small_law" id="small_law" />
+            </div>
+            <div>
+                <label for="clerkships">Clerkships:</label>
+                <input type="text" name="clearships" id="clerkships" />
+            </div>
+            <div>
+                <label for="public_service">Public Service:</label>
+                <input type="text" name="public_service" id="public_service" />
+            </div>
+            <div>
+                <label for="unemp_percent">Underemployment Percentage:</label>
+                <input type="text" name="unemp_percent" id="unemp_percent" />
+            </div>
+            <div>
+                <label for="debt">Debt:</label>
+                <input type="text" name="debt" id="debt" />
+            </div>
+            <div>
+                <label for="attrition">Attrition:</label>
+                <input type="text" name="attrition" id="attrition" />
+            </div>
+            <div>
+                <label for="prestige">Prestige:</label>
+                <input type="text" name="prestige" id="prestige" />
+            </div>
+            <p>Input your personal information to help determine viable schools:</p>
+            <div>
+                <label for="gpa">Your GPA:</label>
+                <input type="text" name="gpa" id="gpa" />
+            </div>
+            <div>
+                <label for="lsat">Your LSAT:</label>
+                <input type="text" name="lsat" id="last" />
+            </div>
+            <p>
+            <button value="Submit" type="submit">Get my report!</button>
+            </p>
+        </form>
 </body>
 
 </html>

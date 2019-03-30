@@ -3,6 +3,7 @@ import school
 import preferences
 import algorithms
 
+import tornado
 from tornado.escape import json_encode
 from tornado.ioloop import IOLoop
 from tornado.web import RequestHandler, Application
@@ -15,7 +16,7 @@ schools = {}
 schools[harvard.name] = harvard
 schools[vandy.name] = vandy
 schools[ucla.name] = ucla
-user_pref = preferences.Preferences(5,5,0,1,1,3,4,3,1)
+user_pref = preferences.Preferences(5,5,0,1,1,3,4,3,1,0,0)
 
 names = ["Harvard", "Vanderbilt", "UCLA"]
 
@@ -33,7 +34,9 @@ class SchoolHandler(RequestHandler):
 
 class ReportHandler(RequestHandler):
     def get(self):
-        '''self.write("Harvard: " + str(algorithms.calculate(harvard, neal)) + "\nVanderbilt: " + str(algorithms.calculate(vandy, neal)) + "\nUCLA: " + str(algorithms.calculate(ucla, neal)))
+        '''self.write("Harvard: " + str(algorithms.calculate(harvard, neal)) + 
+        "\nVanderbilt: " + str(algorithms.calculate(vandy, neal)) + "\nUCLA: " 
+            + str(algorithms.calculate(ucla, neal)))
         '''
         self.write(json.dumps(final_report))
 
@@ -42,8 +45,8 @@ class PreferencesHandler(RequestHandler):
         self.write(open("pref_form.html", "r").read())
 
     def post(self):
-        self.get_body_argument("message")
-        self.write("Successfully posted: " + self.get_body_argument("message"))
+        user_pref = json.loads(self.request.body, object_hook = preferences.as_preferences)
+        self.write("Successfully posted: " + str(user_pref))
 
 class MainHandler(RequestHandler):
     def get(self):
