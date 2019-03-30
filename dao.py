@@ -11,7 +11,6 @@ def create_tables():
 def insert_school(school):
     c = conn.cursor()
     value = (school.name, school.full_name, school.emp_percent, school.big_law, school.small_law, school.public_service, school.clerkships, school.unemp_percent, school.debt, school.attrition, school.prestige, school.gpa, school.lsat)
-    print(str(value))
     try:
         c.execute('INSERT INTO schools VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)', value)
     except Exception as e:
@@ -45,5 +44,4 @@ def get_school_names():
     names = []
     for row in c.execute('SELECT * FROM schools'):
         names.append(str(row[0]))
-    print(str(names))
     return names

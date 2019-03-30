@@ -59,7 +59,7 @@ class ResyncHandler(RequestHandler):
         schools = scraper.get_all_schools(scraper.get_school_names())
         for s in schools:
             dao.insert_school(s)
-        self.write("Successfully synced data for " + len(schools) + " schools.")
+        self.write("Successfully synced data for " + str(len(schools)) + " schools.")
 
 class MainHandler(RequestHandler):
     def get(self):
