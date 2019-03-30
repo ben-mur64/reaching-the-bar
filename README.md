@@ -20,8 +20,6 @@ The goal is to have a simple yet stylish app that allows people to put in their 
 
 ## To-Do List
 
-* Set up a git repo and teach Corbin and Neal how to use it.
-* Define all necessary pieces and functions.
 * Divvy up tasks, who's going to work on what:
   * Ben - Web Crawler, General Architecture, Algorithm?
   * Neal - Algorithm, Design, Look and Feel
