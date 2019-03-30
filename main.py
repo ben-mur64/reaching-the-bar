@@ -9,6 +9,8 @@ from tornado.ioloop import IOLoop
 from tornado.web import RequestHandler, Application
 
 harvard = school.School("Harvard", 86.9, 56.7, 0.3, 11.8, 15.9, 7.8, 365164, 0, 2)
+vandy = school.School("Vanderbilt", 86.2, 30.3, 3.2, 9.6, 9.6, 7.8, 318887, 0, 18)
+ucla = school.School("UCLA", 78.8, 56.7, 36.9, 10.6, 21.8, 3.6, 263740, 0.3, 15)
 
 neal = preferences.Preferences(5,5,0,1,1,3,4,3,1)
 
@@ -22,7 +24,7 @@ class SchoolHandler(RequestHandler):
 
 class ReportHandler(RequestHandler):
     def get(self):
-        self.write(algorithms.calculate(harvard, neal))
+        self.write("Harvard: " + str(algorithms.calculate(harvard, neal)) + "\nVanderbilt: " + str(algorithms.calculate(vandy, neal)) + "\nUCLA: " + str(algorithms.calculate(ucla, neal)))
         '''self.write(json_encode(report.ReportSerializer(final_report))) '''
 
 class MainHandler(RequestHandler):
