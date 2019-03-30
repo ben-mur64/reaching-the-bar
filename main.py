@@ -43,7 +43,6 @@ class PreferencesHandler(RequestHandler):
     def post(self):
         global user_pref 
         user_pref = json.loads(self.request.body, object_hook = preferences.as_preferences)
-        self.redirect('/report')
 
 class MainHandler(RequestHandler):
     def get(self):
