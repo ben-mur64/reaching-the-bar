@@ -3,6 +3,7 @@ import school
 import preferences
 import algorithms
 import scraper
+import dao
 
 import tornado
 from tornado.escape import json_encode
@@ -19,19 +20,19 @@ schools[vandy.name] = vandy
 schools[ucla.name] = ucla '''
 user_pref = preferences.Preferences(5,5,0,1,1,3,4,3,1,0,0)
 
-names = ["harvard", "vanderbilt", "ucla"]
+names = ["harvard"]
 
 def get_report(names):
     scores = {}
     global user_pref
-    schools = scraper.get_all_schools(names)
+    schools = dao.get_all_schools()
     for i in range(len(names)):
         scores[names[i]] = algorithms.calculate(schools[i],user_pref)
     return scores
 
 class ReportHandler(RequestHandler):
     def get(self):
-        final_report = get_report(names)
+        final_report = get_report(dao.get_school_names())
         self.write(json.dumps(final_report))
 
 class PreferencesHandler(RequestHandler):
@@ -44,9 +45,21 @@ class PreferencesHandler(RequestHandler):
 
 class ScrapeTestHandler(RequestHandler):
     def get(self):
-        data = scraper.get_all_schools(names)
+        dao.create_tables()
+        for s in scraper.get_all_schools(scraper.get_school_names()):
+            dao.insert_school(s)
+        self.write(str(dao.get_all_schools()))
+        '''data = scraper.get_all_schools(names)
         for val in data:
-            self.write(school.SchoolSerializer(val).data)
+            self.write(school.SchoolSerializer(val).data)'''
+
+class ResyncHandler(RequestHandler):
+    def get(self):
+        dao.create_tables()
+        schools = scraper.get_all_schools(scraper.get_school_names())
+        for s in schools:
+            dao.insert_school(s)
+        self.write("Successfully synced data for " + len(schools) + " schools.")
 
 class MainHandler(RequestHandler):
     def get(self):
@@ -57,7 +70,8 @@ def make_app():
         (r"/", MainHandler),
         (r'/report', ReportHandler),
         (r'/preferences', PreferencesHandler),
-        (r'/scrape', ScrapeTestHandler)
+        (r'/scrape', ScrapeTestHandler),
+        (r'/resync', ResyncHandler)
     ])
 
 def main():
