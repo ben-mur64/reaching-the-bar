@@ -1,7 +1,11 @@
 .masthead {
     height: 50vh;
     min-height: 500px;
+<<<<<<< HEAD:css/header.css
     background-image: url("../images/iStock_000005426694_Large.jpg");
+=======
+    background-image: url("web/images/iStock_000005426694_Large.jpg");
+>>>>>>> b7bfe53939ba85e4fa8a3fbb9aba1020fef68888:web/css/header.css
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
