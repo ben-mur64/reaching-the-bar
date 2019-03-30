@@ -22,11 +22,12 @@ names = ["Harvard", "Vanderbilt", "UCLA"]
 
 def get_report(names, scores):
     scores = {}
+    global user_pref
     for i in range(len(names)):
         scores[names[i]] = algorithms.calculate(schools[names[i]],user_pref)
     return scores
 
-final_report = get_report(names, user_pref)
+
 
 class SchoolHandler(RequestHandler):
     def get(self):
@@ -38,6 +39,7 @@ class ReportHandler(RequestHandler):
         "\nVanderbilt: " + str(algorithms.calculate(vandy, neal)) + "\nUCLA: " 
             + str(algorithms.calculate(ucla, neal)))
         '''
+        final_report = get_report(names, user_pref)
         self.write(json.dumps(final_report))
 
 class PreferencesHandler(RequestHandler):
@@ -45,8 +47,9 @@ class PreferencesHandler(RequestHandler):
         self.write(open("pref_form.html", "r").read())
 
     def post(self):
+        global user_pref 
         user_pref = json.loads(self.request.body, object_hook = preferences.as_preferences)
-        self.write("Successfully posted: " + str(user_pref))
+        ##self.write("Successfully posted: " + str(user_pref))
 
 class MainHandler(RequestHandler):
     def get(self):

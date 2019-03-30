@@ -2,6 +2,7 @@
 
 <head>
     <title>Preferences</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
         const serialize_form = form => JSON.stringify(
         Array.from(new FormData(form).entries())
@@ -10,20 +11,23 @@
 
         $(document).ready(function(){
             $('#pref_form').on('submit', function(event) {
-            alert("Function fired!")
-            event.preventDefault();
-            const json = serialize_form(this);
-            console.log(json);
-            /*$.ajax({
-                type: 'POST',
-                url: 'https://url.com/users/register',
-                dataType: 'json',
-                data: json,
-                contentType: 'application/json',
-                success: function(data) {
-                alert(data)
-                }
-            });*/
+                alert("Function fired!")
+                event.preventDefault();
+                const json = serialize_form(this);
+                console.log(json);
+                $.ajax({
+                    type: 'POST',
+                    url: '/preferences',
+                    data: json,
+                    contentType: 'application/x-www-form-urlencoded',
+                    success: function(data) {
+                        alert(data)
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        alert("An error occurred.")
+                        console.log(xhr, ajaxOptions, thrownError)
+                    } 
+                });
             });
         });
     </script>
@@ -31,7 +35,6 @@
 
 <body>
     Please enter your priorities from 0 to 5 on the following characteristics of a law school (change):
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <form id="pref_form">
             <div>
                 <label for="emp_percent">Employment Percentage:</label>
@@ -47,7 +50,7 @@
             </div>
             <div>
                 <label for="clerkships">Clerkships:</label>
-                <input type="text" name="clearships" id="clerkships" />
+                <input type="text" name="clerkships" id="clerkships" />
             </div>
             <div>
                 <label for="public_service">Public Service:</label>

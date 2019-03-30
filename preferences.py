@@ -25,4 +25,4 @@ class Preferences:
         self.lsat = lsat
 
 def as_preferences(dct):
-    return Preferences(dct['emp_percent'], dct['big_law'], dct['small_law'], dct['public_service'], dct['clerkships'], dct['unemp_percent'], dct['debt'], dct['attrition'], dct['prestige'], dct['gpa'], dct['lsat'])
+    return Preferences(float(dct['emp_percent']), float(dct['big_law']), float(dct['small_law']), float(dct['public_service']), float(dct['clerkships']), float(dct['unemp_percent']), float(dct['debt']), float(dct['attrition']), float(dct['prestige']), float(dct['gpa']), float(dct['lsat']))
