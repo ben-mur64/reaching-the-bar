@@ -19,3 +19,6 @@ class Preferences:
         self.debt = debt
         self.attrition = attrition
         self.prestige = prestige
+
+def as_preferences(dct):
+    return Preferences(dct['emp_percent'], dct['big_law'], dct['small_law'], dct['public_service'], dct['clerkships'], dct['unemp_percent'], dct['debt'], dct['attrition'], dct['prestige'])
