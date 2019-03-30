@@ -12,13 +12,14 @@ class School:
     attrition = 0.0
     prestige = 0.0
 
-    def __init__(self, name, emp_percent, big_law, small_law, clerkships,
+    def __init__(self, name, emp_percent, big_law, small_law, clerkships, public_service,
     unemp_percent, debt, attrition, prestige):
         self.name = name
         self.emp_percent = emp_percent
         self.big_law = big_law
         self.small_law = small_law
         self.clerkships = clerkships
+        self.public_service = public_service
         self.unemp_percent = unemp_percent
         self.debt = debt
         self.attrition = attrition
