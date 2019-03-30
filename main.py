@@ -4,20 +4,13 @@ import preferences
 import algorithms
 import scraper
 import dao
+import report
 
 import tornado
 from tornado.escape import json_encode
 from tornado.ioloop import IOLoop
 from tornado.web import RequestHandler, Application
 
-'''harvard = school.School("Harvard", 86.9, 56.7, 0.3, 11.8, 15.9, 7.8, 365164, 0, 2)
-vandy = school.School("Vanderbilt", 86.2, 30.3, 3.2, 9.6, 9.6, 7.8, 318887, 0, 18)
-ucla = school.School("UCLA", 78.8, 56.7, 36.9, 10.6, 21.8, 3.6, 263740, 0.3, 15)
-
-schools = {}
-schools[harvard.name] = harvard
-schools[vandy.name] = vandy
-schools[ucla.name] = ucla '''
 user_pref = preferences.Preferences(5,5,0,1,1,3,4,3,1,0,0)
 
 names = ["harvard"]
@@ -27,7 +20,7 @@ def get_report(names):
     global user_pref
     schools = dao.get_all_schools()
     for i in range(len(names)):
-        scores[names[i]] = algorithms.calculate(schools[i],user_pref)
+        scores[names[i]] = report.Report(algorithms.calculate(schools[i], user_pref), schools[i].lsat, schools[i].gpa)
     return scores
 
 class ReportHandler(RequestHandler):

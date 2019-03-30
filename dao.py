@@ -7,6 +7,7 @@ def create_tables():
     c = conn.cursor()
     c.execute("DROP TABLE IF EXISTS schools;")
     c.execute(open("schema.sql", "r").read())
+    conn.commit()
 
 def insert_school(school):
     c = conn.cursor()
@@ -15,6 +16,7 @@ def insert_school(school):
         c.execute('INSERT INTO schools VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)', value)
     except Exception as e:
         print(e)
+    conn.commit()
 
 def get_all_schools():
     c = conn.cursor()
