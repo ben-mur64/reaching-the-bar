@@ -22,15 +22,13 @@ The goal is to have a simple yet stylish app that allows people to put in their 
 
 * Set up a git repo and teach Corbin and Neal how to use it.
 * Define all necessary pieces and functions.
-* Make the architecture decision
-  * What language do we want to use for the project?
-    * Ruby?
-    * Python?
-    * Javascript?
-    * Something else?
-  * Do we want to use a web interface, a GUI, or an app?
-  * If we go with a web interface, do we want to use AWS Lambdas?
 * Divvy up tasks, who's going to work on what:
   * Ben - Web Crawler, General Architecture, Algorithm?
   * Neal - Algorithm, Design, Look and Feel
   * Corbin - Front End?, Algorithm? Graphing?
+
+## Decisions Made
+
+* We're using a web interface.
+* Corbin can write the front end in Javascript.
+* I'm writing the back end in Python.

@@ -23,14 +23,6 @@ class School:
         self.debt = debt
         self.attrition = attrition
         self.prestige = prestige
-    
-    def to_json(self):
-        return {
-            'name': self.name,
-            'emp_percent': self.emp_percent,
-            'big_law': self.big_law,
-            'small_law': self.small_law
-        }
 
     def calculate_score(self, weights):
         return None
