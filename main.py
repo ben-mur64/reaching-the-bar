@@ -27,18 +27,12 @@ def get_report(names, scores):
         scores[names[i]] = algorithms.calculate(schools[names[i]],user_pref)
     return scores
 
-
-
 class SchoolHandler(RequestHandler):
     def get(self):
         self.write(json_encode(school.SchoolSerializer(harvard).data))
 
 class ReportHandler(RequestHandler):
     def get(self):
-        '''self.write("Harvard: " + str(algorithms.calculate(harvard, neal)) + 
-        "\nVanderbilt: " + str(algorithms.calculate(vandy, neal)) + "\nUCLA: " 
-            + str(algorithms.calculate(ucla, neal)))
-        '''
         final_report = get_report(names, user_pref)
         self.write(json.dumps(final_report))
 
@@ -49,7 +43,7 @@ class PreferencesHandler(RequestHandler):
     def post(self):
         global user_pref 
         user_pref = json.loads(self.request.body, object_hook = preferences.as_preferences)
-        ##self.write("Successfully posted: " + str(user_pref))
+        self.redirect('/report')
 
 class MainHandler(RequestHandler):
     def get(self):

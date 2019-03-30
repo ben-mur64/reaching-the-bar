@@ -11,7 +11,6 @@
 
         $(document).ready(function(){
             $('#pref_form').on('submit', function(event) {
-                alert("Function fired!")
                 event.preventDefault();
                 const json = serialize_form(this);
                 console.log(json);
@@ -20,11 +19,9 @@
                     url: '/preferences',
                     data: json,
                     contentType: 'application/x-www-form-urlencoded',
-                    success: function(data) {
-                        alert(data)
-                    },
+                    success: function(data) { },
                     error: function(xhr, ajaxOptions, thrownError) {
-                        alert("An error occurred.")
+                        alert("An error occurred. Check the console.")
                         console.log(xhr, ajaxOptions, thrownError)
                     } 
                 });
