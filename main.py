@@ -15,18 +15,18 @@ user_pref = preferences.Preferences(5,5,0,1,1,3,4,3,1,0,0)
 
 names = ["harvard"]
 
-def get_report(names):
-    scores = {}
+def get_reports(names):
+    reports = []
     global user_pref
     schools = dao.get_all_schools()
     for i in range(len(names)):
-        scores[names[i]] = report.Report(algorithms.calculate(schools[i], user_pref), schools[i].lsat, schools[i].gpa)
-    return scores
+        reports.append(report.Report(names[i], algorithms.calculate(schools[i], user_pref), schools[i].lsat, schools[i].gpa))
+    return reports
 
 class ReportHandler(RequestHandler):
     def get(self):
-        final_report = get_report(dao.get_school_names())
-        self.write(json.dumps(final_report))
+        for report in get_reports(dao.get_school_names()):
+            self.write(json.dumps(report.__dict__))
 
 class PreferencesHandler(RequestHandler):
     def get(self):
